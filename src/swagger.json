@@ -58,6 +58,17 @@
         "tags": ["Users"],
         "summary": "List all users",
         "description": "List all users",
+        "parameters": [
+          {
+            "in": "header",
+            "description": "id do usuario para busca",
+            "name": "user_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
