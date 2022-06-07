@@ -53,6 +53,27 @@
             "description": "User already exists"
           }
         }
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "List all users",
+        "description": "List all users",
+        "responses": {
+          "200": {
+            "description": "Success",
+             "content": {
+               "application/json": {
+                 "schema": {
+                   "type": "array",
+                   "items": {
+                     "type": "object",
+                     "$ref": "#/components/schemas/User"
+                   }                   
+                 }
+               }
+             }
+          }
+        }
       }
     },
     "/users/{user_id}": {
@@ -71,6 +92,37 @@
         "responses": {
           "200": {
             "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "description": "update de usuario para admin pelo id",
+        "summary": "update de usuario para admin pelo id",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "id do usuario para busca",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated",
             "content": {
               "application/json": {
                 "schema": {
