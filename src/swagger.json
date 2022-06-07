@@ -24,18 +24,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "user name sample",
+                    "email": "user email sample"
                   }
-                },
-                "example": {
-                  "name": "user name sample",
-                  "email": "user email sample"
                 }
               }
             }
@@ -43,50 +39,76 @@
         },
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           },
           "400": {
             "description": "User already exists"
           }
         }
-      },
+      }
+    },
+    "/users/{user_id}": {
       "get": {
+        "description": "Busca de usuario pelo id",
+        "summary": "Busca de usuario pelo id",
         "tags": ["Users"],
-        "summary": "List all users",
-        "description": "List all users",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "id do usuario para busca",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Success",
-             "content": {
-               "application/json": {
-                 "schema": {
-                   "type": "array",
-                   "items": {
-                     "type": "object",
-                     "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "admin": {
-                        "type": "boolean"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "email": {
-                       "type": "string"
-                      },
-                      "created_at": {
-                        "type": "string"
-                      },
-                      "updated_at": {
-                        "type": "string"
-                      }
-                    }
-                   }                   
-                 }
-               }
-             }
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "admin": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+          "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
           }
         }
       }
